@@ -1,0 +1,26 @@
+    <div class="container">
+    <form class="col-6" action= <%= `/campgrounds/${cp._id}/edit?_method=put` %> method="post">
+        <div class="mb-3">
+          <label for="title" class="form-label">NAME</label>
+          <input type="text" value="<%= cp.title%>" name="title" class="form-control" id="title" aria-describedby="title">
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" value="<%= cp.location%>" name="location" class="form-control" id="location">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload Image</label>
+            <input type="text" value=<%= cp.image%> name="image" class="form-control" id="image">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" value=<%= cp.price%> name="price" class="form-control" id="price">
+        </div>
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" name="Description" id="Description" rows="4" cols="50"><%= cp.Description %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href=<%= `/campgrounds` %> class="btn btn-primary">BACK</a>
+      </form>
+    </div>

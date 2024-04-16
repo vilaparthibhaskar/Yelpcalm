@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="/css/starability-fade.css"/>
+    <div class="card container d-flex flex-row mt-5">
+        <div class="col-4">
+        <img  class="card-img" alt="img" height="400" src=<%= campground.image %>>
+        </div>
+        <div class="card-body col-8">
+          <h5 class="card-title"><%= `${campground.title}` %></h5>
+          <h5 class="form-text">posted by <%= campground.user.username %></h5>
+          <h5 class="form-text"><%= campground.location %></h5>
+          <div class="form-text fw-bold fs-5">
+            <span>Price</span>
+            <span class="form-text"><%= `$${campground.price}` %></span>
+          </div>
+          <p class="card-text"><%= campground.Description %></p>
+          <a href=<%= `/campgrounds` %> class="btn btn-primary">Home</a>
+          <a href=<%= `/campgrounds/${campground._id}/edit` %> class="btn btn-primary">EDIT</a>
+          <form action=<%= `/campgrounds/${campground._id}?_method=delete` %> method="post">
+            <button class="btn btn-danger mt-3" type="submit">Delete</button>
+          </form>
+        </div>
+    </div>
+  <div class="container mt-5">
+    <h3>Reviews</h3>
+    <div class="container">
+      <h4>post a review</h4>
+      <form class="col-6" action=<%= `/campgrounds/${campground._id}/review` %> method="post">
+        <fieldset class="starability-fade">
+          <legend>Select rating:</legend>
+          <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+          <input type="radio" id="first-rate1" name="rating" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="rating" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="rating" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="rating" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="rating" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+        <label for="review" class="form-label"></label>
+        <textarea name="review" class="form-control" id="review" aria-describedby="review" row="5" column="5"></textarea>
+        <button type="submit" class="btn btn-primary mt-3 mb-3">Post</button>
+      </form>
+    </div>
+    <h3>Reviews of <%= campground.title %> </h3>
+    <div class="container">
+      <% for(let i of reviews){ %>
+        <div class="col-6 border mb-3 rounded">
+        <h5><b>Posted by <%= i.user.username %></b></h5>
+        <div class="row">
+        <h6 class="col-2 mt-1">Rating</h6>
+        <p class="starability-result col-6" data-rating=<%= i.rating %>> </p>
+        </div>
+        <p class="mb-0"> <%= i.text %> </p>
+        <form class="mt-0 mb-2" action=<%= `/campgrounds/${campground._id}/review/${i._id}?_method=delete` %> method="post">
+          <button class="btn btn-danger mt-3" type="submit">Delete</button>
+        </form>
+        </div>
+      <% } %>
+    </div>
+  </div>

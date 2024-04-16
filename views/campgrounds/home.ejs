@@ -1,0 +1,23 @@
+
+    <h1>Here are the list of Camp grounds</h1>
+    <form action="/campgrounds/new" method="get">
+        <button class="btn btn-light offset-1" type="submit">CREATE NEW</button>
+    </form>
+    <div class="container text-center">
+    <% for(let cp of campgrounds) { %>
+    <div class="row mt-3">
+    <div class="card container d-flex flex-row col-12">
+        <div class="col-4">
+        <img src=<%= cp.image %> class="card-img" alt="img" height="200">
+        </div>
+        <div class="card-body col-8">
+          <h5 class="card-title"><a href=<%= `/campgrounds/${cp._id}` %>><%= `${cp.title}` %></a></h5>
+          <h5 class="form-text"><%= cp.location %></h5>
+          <p class="card-text"><%= cp.Description %></p>
+          <a href=<%= `/campgrounds/${cp._id}/edit` %> class="btn btn-primary">EDIT</a>
+        </div>
+    </div>
+    </div>
+    <% } %>
+    </div>
+
